@@ -1,0 +1,17 @@
+Compiled with python 3.7.3
+
+Campo minado {
+    Jogo que roda no client(visualmente) enquanto o server processa as jogadas
+}
+
+*Cada conexão é um novo guest. Cada um possui sua própria matriz.
+
+Fluxo {
+    1. Jogador inicia jogo (client)
+    2.a Jogador inicia um novo jogo (c -> s, avisa para criar um novo array de bombas)
+    2.b Jogador continua o jogo salvo (c -> s, avisa para pegar um array salvo, s -> c)
+    2.c Jogador clica em sair (fecha client) (encerra fluxo)
+
+
+    3. Tela aparece
+}
