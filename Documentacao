@@ -5,13 +5,24 @@ Campo minado {
 }
 
 *Cada conexão é um novo guest. Cada um possui sua própria matriz.
+Client só mostra
+Servidor faz o processamento
 
 Fluxo {
-    1. Jogador inicia jogo (client)
-    2.a Jogador inicia um novo jogo (c -> s, avisa para criar um novo array de bombas)
-    2.b Jogador continua o jogo salvo (c -> s, avisa para pegar um array salvo, s -> c)
+    1. Jogador inicia jogo (client requisita servidor para chegar se há jogo salvo)
+    2.a Jogador inicia um novo jogo (c -> s, avisa para criar uma nova instancia)
+    2.b Jogador continua o jogo salvo (c -> s, avisa para pegar uma intancia salva, s -> c)
     2.c Jogador clica em sair (fecha client) (encerra fluxo)
 
 
-    3. Tela aparece
+    3. Tela aparece para jogador com a matriz de botões
+
+    4. Jogador aperta em um botão, envia requisição para o server processar (c -> s, envia botão apertado para server processar,
+        c -> s, devolve resultado, frontend atualiza)
+
+    5. Jogador aperta em uma bomba, explode tudo, tranca os botões, fecha matriz
+
+    6.a Jogador clica em new gayme, reseta matriz
+    6.b Jogador clica em ir ao menu, reseta matriz, sai
+
 }
