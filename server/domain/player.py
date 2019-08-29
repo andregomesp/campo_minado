@@ -1,5 +1,7 @@
-from connection.session import Session
+from server.connection.session import Session
 from typing import Type
-class player:
+
+
+class Player:
     score: int
     session: Type[Session]

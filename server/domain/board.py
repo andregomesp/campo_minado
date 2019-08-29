@@ -1,5 +1,5 @@
 from typing import List, Type
-from domain.bomb import Bomb
+from server.domain.bomb import Bomb
 
 
 class Board:
