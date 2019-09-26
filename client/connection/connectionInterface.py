@@ -1,9 +1,9 @@
 from client.connection.connection import Connection
 
 
-def make_connection():
+def make_connection(message_array):
     connection = Connection()
-    connection.start_connections(2)
+    connection.start_connections(1, message_array)
     try:
         while True:
             events = connection.selector.select(timeout=1)

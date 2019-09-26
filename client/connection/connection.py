@@ -7,9 +7,9 @@ class Connection:
     host: str = "127.0.0.1"
     port: int = 2045
     selector: selectors
-    messages = [b'Message 1 from client.', b'Message 2 from client.']
+    # messages = [b'Message 1 from client.', b'Message 2 from client.']
 
-    def start_connections(self, num_conns):
+    def start_connections(self, num_conns, messages):
         self.selector = selectors.DefaultSelector()
         server_addr = (self.host, self.port)
         for i in range(0, num_conns):
@@ -20,9 +20,9 @@ class Connection:
             sock.connect_ex(server_addr)
             events = selectors.EVENT_READ | selectors.EVENT_WRITE
             data = types.SimpleNamespace(connid=connid,
-                                         msg_total=sum(len(m) for m in self.messages),
+                                         msg_total=sum(len(m) for m in messages),
                                          recv_total=0,
-                                         messages=list(self.messages),
+                                         messages=list(messages),
                                          outb=b'')
             self.selector.register(sock, events, data=data)
 
