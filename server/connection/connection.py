@@ -27,7 +27,7 @@ class Connection:
         events = selectors.EVENT_READ | selectors.EVENT_WRITE
         self.selector.register(conn, events, data=data)
 
-    def service_connection(self, key, mask):
+    def service_connection(self, key, mask, board):
         sock = key.fileobj
         data = key.data
         if mask & selectors.EVENT_READ:
@@ -40,6 +40,10 @@ class Connection:
                 sock.close()
         if mask & selectors.EVENT_WRITE:
             if data.outb:
-                print('echoing', repr(data.outb), 'to', data.addr)
-                sent = sock.send(data.outb)
-                data.outb = data.outb[sent:]
+                number_bombs = board.check_square(data.outb)
+                print('echoing', repr(number_bombs), 'to', data.addr)
+                sent = sock.send(bytes(number_bombs, "utf8"))
+                data.outb = b'3'
+                print('closing connection to', data.addr)
+                self.selector.unregister(sock)
+                sock.close()
